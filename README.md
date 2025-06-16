@@ -1,4 +1,4 @@
-Documenting two Machine Learning Projects that I have taken up & implemented at Work place:
+Documenting two Machine Learning Projects that I have taken up at Work place:
 
     i) Renewal Propensity Model at Khatabook using Logistic regression.
 
@@ -56,8 +56,7 @@ Documenting two Machine Learning Projects that I have taken up & implemented at 
 **Model Evaluation**:
 
     Outputs include model accuracy and a detailed classification report with precision, recall, and F1-score.
-    We are expecting and out of Probability-Based renewqal Predictions.
-    The model predicts the probability of renewal for each customer based on the usage cohort they belong to .
+    The model predicts the probability of renewal for each customer based on the usage cohort they belong to.
 
 **FINAL RESULT**: 
 
@@ -76,11 +75,9 @@ For each Customer_id , we have the following as output based on the usage cohort
 
 **Problem Statement**:
 
-        Paypal has seen a historic trend of dos-attack and fraudulent signup attempts as it is one of the 
-        prominent product fintech company. Although there is a specialised Machine Learning team that handles
-        Fraudulent attempts at every stage of onboarding. As a part of Product data sciecne team, we wanted to
-        handle such cases proactively to avoid considering in our analysis in real time.
-
+        Paypal has seen a historic trend of dos-attack and fraudulent signup attempts which imbalances A/B Test results.
+        Although there is a specialised Machine Learning team that handles Fraudulent attempts at every stage of onboarding,
+        As a part of Product data science team, we wanted to do a hands-on project on handling such cases a backup.
 
         Here I am using XGBoost (Extreme Gradient Boosting) to detect fraudulent signup customers with the
         help of user's events data. This model is trained to classify whether a signup is genuine or fraudulent,
@@ -119,7 +116,8 @@ Considered the below input features:
 
 **Handling Class Imbalance**
         
-        Fraudulent signups are often rare. The scale_pos_weight parameter in XGBoost is set to balance the classes by computing the ratio of non-fraud to fraud cases in the training set.
+        Fraudulent signups are rare. So, the _scale_pos_weight_ parameter in XGBoost is set to balance the classes by
+        computing the ratio of non-fraud to fraud cases in the training data set.
 
 
 **Model Training**:
