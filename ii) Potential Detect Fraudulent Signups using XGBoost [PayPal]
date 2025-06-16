@@ -20,6 +20,10 @@ for col in ['device_type']:
     le = LabelEncoder()    ## transform the string labels into integers
     df[col] = le.fit_transform(df[col])
 
+for col in ['browser_type']:
+    le = LabelEncoder()    ## transform the string labels into integers
+    df[col] = le.fit_transform(df[col])
+
 # Target setting
 y = df['is_fraud']  # 1 = Fraud, 0 = Legit
 X = df[feature_cols]
