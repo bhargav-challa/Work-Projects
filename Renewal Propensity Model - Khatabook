@@ -1,0 +1,78 @@
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, classification_report
+from sklearn.preprocessing import LabelEncoder
+
+# Removing Original data for security)
+
+# Create DataFrame
+df = pd.read_csv('Customers_usage.csv')
+
+# Following are the columns we are using
+
+#  'customerid' # customer due to renew
+#  'renewal_month' # up for renewal month  - not of use since everything is pre calculated 
+#  'avg_usage_in_last_three_months' # avg days used per month
+#  'Renewed'   #  1 or 0
+
+
+# Define cohorts based on usage days
+def assign_cohort(usage_days):
+    if usage_days == 0:
+        return 'P4'
+    elif usage_days <= 5 and usage_days >= 1:
+        return 'P3'
+    elif usage_days <= 15 and usage_days >= 6:
+        return 'P2'
+    elif usage_days <= 25 and usage_days >= 16:
+        return 'P1'
+    else:
+        return 'P0'
+
+# Create cohort column in dataframe
+df['Usage_Cohort'] = df['avg_usage_in_last_three_months'].apply(assign_cohort)
+
+# Split data into features (X) and target (y)
+X = df[['avg_usage_in_last_three_months']] # input feature
+y = df['Renewed']     # predictable Target
+
+# Train-Test Split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)  # 30% of the data will be used for testing, and the remaining 70% will be used for training.
+
+# Logistic Regression Model
+model = LogisticRegression()
+model.fit(X_train, y_train)
+
+# Predictions
+y_pred = model.predict(X_test)
+
+# Evaluate Model
+accuracy = accuracy_score(y_test, y_pred)
+print(f"Accuracy: {accuracy * 100:.2f}%")
+print(classification_report(y_test, y_pred))
+
+# Predict probabilities of renewal
+renewal_probabilities = model.predict_proba(X)[:, 1]  # Probability of renewal
+
+# Add predicted probabilities to DataFrame
+df['Predicted_Renewal_Probability'] = renewal_probabilities
+
+# Assign cohorts based on predicted renewal probabilities
+def assign_cohort_based_on_prob(prob):
+    if prob >= 0.95 and prob <= 1:
+        return '95%'
+    elif prob >= 0.85 and prob <= 0.94:
+        return '85%'
+    elif prob >= 0.75 and prob <= 0.84:
+        return '75%'
+    elif prob >= 0.40 and prob <= 0.74:
+        return '40%'
+    else:
+        return '5%'
+
+df['Predicted_Renewal_Percent'] = df['Predicted_Renewal_Probability'].apply(assign_cohort_based_on_prob)
+
+# Display Results
+print(df[['customerid', 'Usage_Cohort', 'avg_usage_in_last_three_months', 'Predicted_Renewal_Probability', 'Predicted_Renewal_Percent']])
+
