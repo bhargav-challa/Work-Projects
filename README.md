@@ -1,3 +1,5 @@
 # Work-Projects
-Summarizing all the projects here for future reference 
-This is the repository created to document all my work place projects at one place 
+
+Documenting 2 Machine Learning Projects that i have taken up at Work place, 
+i) Renewal Propensity Model at Khatabook using Logistic regression.
+ii) Fraudulent signup detection at Paypal using XGBoost
