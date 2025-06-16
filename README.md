@@ -12,7 +12,7 @@ Documenting two Machine Learning Projects that I have taken up at Work place:
 
 **Project Summary:**
 
-    I'm using Logistic Regression model to predict whether a customer will renew a product subscription
+    I'm using Logistic Regression model to predict whether a customer  will renew a product subscription
     based on their last 3 months average usage data (avg days used per month).
 
 **Problem Statement**
