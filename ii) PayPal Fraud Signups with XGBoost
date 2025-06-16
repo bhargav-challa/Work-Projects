@@ -53,7 +53,7 @@ for col in ['browser_type']:
     print("ROC AUC Score:", roc_auc_score(y_test, y_prob))
 
 
-# Feature Importance to understand which input feature is the most supporting towards fraudulent detection
+# Feature Importance To Understand which features are strong indicators of fraud
 
     import matplotlib.pyplot as plt
     from xgboost import plot_importance
