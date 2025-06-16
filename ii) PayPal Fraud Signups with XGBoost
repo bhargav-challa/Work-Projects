@@ -47,7 +47,7 @@ print("ROC AUC Score:", roc_auc_score(y_test, y_prob))
 
 
 
-# Feature Importance
+# Feature Importance to understand which input feature is the most supporting towards fraudulent detection
 
 import matplotlib.pyplot as plt
 from xgboost import plot_importance
