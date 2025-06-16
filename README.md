@@ -7,6 +7,7 @@ Documenting two Machine Learning Projects that I have taken up & implemented at 
 --------------------------------------------------------------------------------------------------------------------------------
 **PROJECT:** 
     i) Renewal Propensity Model at Khatabook using Logistic regression. Tried Non-Heauristic ML Approach.
+    
 --------------------------------------------------------------------------------------------------------------------------------
 
 **Project Summary:**
