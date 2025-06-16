@@ -2,55 +2,61 @@ import pandas as pd
 import numpy as np
 from xgboost import XGBClassifier
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import classification_report, confusion_matrix, roc_auc_score  ## Since accuracy is not the correct metric to measure, we go with these
+from sklearn.metrics import classification_report, confusion_matrix, roc_auc_score
 from sklearn.preprocessing import LabelEncoder
 
+
 # Load the Data with all the features
-df = pd.read_csv('signup_events.csv')
+    df = pd.read_csv('signup_events.csv')
+
 
 # features part of the file are
-feature_cols = [
-    'ip_country_match','ip_risk_score', 'is_vpn', 'email_verified', 'phone_verified', 'profile_verified',
-    'signup_hour', 'device_type', 'browser_type', 'is_disposable_email', 'risk_tier_flag', 'restriction_placed',
-     'signup_duration_sec'
-]
+    feature_cols = [
+        'ip_country_match','ip_risk_score', 'is_vpn', 'email_verified', 'phone_verified', 'profile_verified',
+        'signup_hour', 'device_type', 'browser_type', 'is_disposable_email', 'risk_tier_flag', 'restriction_placed',
+         'signup_duration_sec']
+
 
 # Encode categorical variables into integers
 for col in ['device_type']:
     le = LabelEncoder()    ## transform the string labels into integers
     df[col] = le.fit_transform(df[col])
 
+
 for col in ['browser_type']:
     le = LabelEncoder()    ## transform the string labels into integers
     df[col] = le.fit_transform(df[col])
 
+
 # Target setting
-y = df['is_fraud']  # 1 = Fraud, 0 = Legit
-X = df[feature_cols]
+    y = df['is_fraud']  # 1 = Fraud, 0 = Legit
+    X = df[feature_cols]
+
 
 # Train-test split
-X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y, test_size=0.3, random_state=42)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y, test_size=0.3, random_state=42)
+
 
 # Xtreme Gradient Boosting Model generation
-model = XGBClassifier(scale_pos_weight=(len(y_train[y_train==0]) / len(y_train[y_train==1])))
-model.fit(X_train, y_train)
+    model = XGBClassifier(scale_pos_weight=(len(y_train[y_train==0]) / len(y_train[y_train==1])))
+    model.fit(X_train, y_train)
+
 
 # Generating Predictions
-y_pred = model.predict(X_test)
-y_prob = model.predict_proba(X_test)[:, 1]
+    y_pred = model.predict(X_test)
+    y_prob = model.predict_proba(X_test)[:, 1]
+
 
 # Model Evaluation
-print(confusion_matrix(y_test, y_pred))
-print(classification_report(y_test, y_pred))
-print("ROC AUC Score:", roc_auc_score(y_test, y_prob))
-
-
+    print(confusion_matrix(y_test, y_pred))
+    print(classification_report(y_test, y_pred))
+    print("ROC AUC Score:", roc_auc_score(y_test, y_prob))
 
 
 # Feature Importance to understand which input feature is the most supporting towards fraudulent detection
 
-import matplotlib.pyplot as plt
-from xgboost import plot_importance
+    import matplotlib.pyplot as plt
+    from xgboost import plot_importance
 
 plot_importance(model)
 plt.show()
