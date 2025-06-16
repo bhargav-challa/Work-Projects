@@ -1,8 +1,8 @@
 Documenting two Machine Learning Projects that I have taken up & implemented at Work place:
 
-i) Renewal Propensity Model at Khatabook using Logistic regression.
+    i) Renewal Propensity Model at Khatabook using Logistic regression.
 
-ii) Fraudulent signup detection at Paypal using XGBoost
+    ii) Fraudulent signup detection at Paypal using XGBoost
 
 --------------------------------------------------------------------------------------------------------------------------------
 **PROJECT:** 
