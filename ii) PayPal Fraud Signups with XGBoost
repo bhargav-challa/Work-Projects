@@ -6,6 +6,7 @@ from sklearn.metrics import classification_report, confusion_matrix, roc_auc_sco
 from sklearn.preprocessing import LabelEncoder
 
 
+
 # Load the Data with all the features
     df = pd.read_csv('signup_events.csv')
 
